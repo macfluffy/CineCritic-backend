@@ -1,9 +1,7 @@
-# For speed optimization purposes, we'll do a clean 
-# install of the dependencies first, then copy over 
-# the remaining files
-
+# Stage 1: Build the application with a clean install
+# of the dependencies.
 # Current stable version of Node: v24.11.1
-FROM node:24
+FROM node:24 AS builder
 
 # Set the working directory to /app
 WORKDIR /app
@@ -11,11 +9,33 @@ WORKDIR /app
 # Copy the list of dependencies into /app
 COPY package*.json ./
 
-# Perform a clean install of all our dependencies.
-RUN npm ci
+# Perform a clean install of all our production 
+# dependencies.
+RUN npm ci --omit=dev
+
+# Stage 2: Build and run the application
+# For speed optimization purposes, we'll do a clean 
+# install of the dependencies first, then copy over 
+# the remaining files
+FROM node:24 AS production
+
+WORKDIR /app
+
+COPY --from=builder /app/node_modules ./node_modules
 
 # Copy the remaining files
 COPY . .
+
+# Create the application user and assign the default
+# user when opening the application as basicUser for
+# security purposes
+RUN groupadd application-users && useradd basic-user -G application-users
+USER basic-user
+
+# Map and open up port 4000 to allow outside
+# access to the containerised application
+ENV PORT=4000
+EXPOSE 4000
 
 # Start the server
 CMD ["npm", "start"]
