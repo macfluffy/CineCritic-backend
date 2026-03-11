@@ -1,0 +1,50 @@
+# The application is built on an Express server.
+# It requires the PSQL db to be up and established
+# before running
+services:
+  app:
+    build:
+      context: .
+      target: production
+    # Mounts a copy of the .env file on the host 
+    # inside the docker container
+    env_file: .env
+    # Map the host computer's port to 4000, to make 
+    # the app accessible to the outside
+    ports:
+      - "4000:4000"
+    # Wait for the PostgreSQL database to be up and 
+    # running before running the Express server
+    depends_on: 
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres
+    volumes:
+      - postgres-data:/data/db
+    # All neccessary variables to create the database
+    # is in the .env file
+    env_file: .env
+    # Check the database is up and running. Give it a
+    # healthy status when it is running.
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL", 
+          "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      # 1 minute grace period before attempting the 
+      # status check
+      start_period: 60s
+
+# All the database data is stored in a named volume
+# so data can persist if the container is deleted
+# and recreated
+volumes:
+  postgres-data:
+    driver: local
