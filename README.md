@@ -160,6 +160,28 @@ Docs available at `http://localhost:4000/docs` once the server is running.
    jay.son@payload.dev / json123
    ```
 
+## Setting up your own containerised server
+### Creating a Docker Container
+Note: If you are running this on WSL (Ubuntu), you may need to open Docker Desktop first before executing the following commands.
+
+1. Setup your ```.env``` file in the project root folder, following the ```.env.example``` template.
+
+2. Create / Build the docker image file with the name ```cinecritic_backend_image```.
+```
+docker build -t cinecritic_backend_image .
+```
+
+3. Run the image using the compose file. The container will have the name ```cinecritic-backend-app```.
+```
+docker compose up -d
+```
+
+### Updating the Docker Container
+1. Update the docker file
+```
+docker compose up --build
+```
+
 ## 🧩 Key Endpoints
 
 | Area       | Highlights                                | Notes                                                            |

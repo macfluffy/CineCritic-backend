@@ -1,0 +1,11 @@
+.env
+.git
+.github
+.gitignore
+
+docs/openapi.yaml
+
+node_modules
+
+Dockerfile
+docker-compose.yml
