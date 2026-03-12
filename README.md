@@ -176,6 +176,13 @@ docker build -t cinecritic_backend_image .
 docker compose up -d
 ```
 
+4. Seed the database once. Use the name of the express server used in the docker-compose file, in place of ```app```.
+```
+docker compose run app npm run seed
+```
+
+Your application should now be ready to run.
+
 ### Updating the Docker Container
 1. Update the docker file
 ```
