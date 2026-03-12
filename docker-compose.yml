@@ -9,6 +9,10 @@ services:
     # Mounts a copy of the .env file on the host 
     # inside the docker container
     env_file: .env
+    # Setup network for the backend and frontend 
+    # containers to communicate with each other
+    networks:
+      - cinecritics-network
     # Map the host computer's port to 4000, to make 
     # the app accessible to the outside
     ports:
@@ -27,6 +31,11 @@ services:
     # All neccessary variables to create the database
     # is in the .env file
     env_file: .env
+    networks:
+      - cinecritics-network
+    # Map port 5432 to access the PostgreSQL Database
+    ports:
+      - "5432:5432"
     # Check the database is up and running. Give it a
     # healthy status when it is running.
     healthcheck:
@@ -41,6 +50,13 @@ services:
       # 1 minute grace period before attempting the 
       # status check
       start_period: 60s
+
+# Bridge network provides connection to local services.
+# Network the backend, database, and frontend together
+# so the containers can talk to each other.
+networks:
+  cinecritics-network:
+    driver: bridge
 
 # All the database data is stored in a named volume
 # so data can persist if the container is deleted
