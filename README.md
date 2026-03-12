@@ -18,6 +18,7 @@ CineCritic is a movie discovery and review platform; this back-end API is built 
 - [Data Source Attribution](#-data-source-attribution)
 - [Commands](#-commands)
 - [Backend Install Instructions](#-backend-install-instructions)
+- [Setting up your own containerised server](#-setting-up-your-own-containerised-server)
 - [Key Endpoints](#-key-endpoints)
 - [Endpoints](#-endpoints)
 - [Environment Variables](#-environment-variables)
