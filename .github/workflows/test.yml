@@ -30,7 +30,14 @@ jobs:
                 POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
                 POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
                 POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-              run: npm run test > report.txt
+              run: |
+                    if [ -n "$MY_SECRET" ]; then
+                      echo "Secret is set and not empty."
+                    else
+                      echo "Secret is NULL or empty."
+                      exit 1
+                    fi
+                    npm run test > report.txt
 
             - name: Archive the test report
               uses: actions/upload-artifact@v7.0.0
