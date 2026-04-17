@@ -23,7 +23,14 @@ jobs:
               run: npm ci
 
             - name: Run the test
-              run: DATABASE_URL=${{ secrets.DATABASE_URL }} npm run test > report.txt
+              env:
+                JWT_SECRET: ${{ secrets.JWT_SECRET }}
+                TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+                DATABASE_URL: ${{ secrets.DATABASE_URL }}
+                POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+                POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+                POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+              run: npm run test > report.txt
 
             - name: Archive the test report
               uses: actions/upload-artifact@v7.0.0
