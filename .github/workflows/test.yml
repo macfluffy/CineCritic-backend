@@ -3,6 +3,19 @@ name: Test code
 on:
     # Only trigger this workflow when it is called
     workflow_call:
+      secrets:
+        JWT_SECRET:
+          required: true
+        TMDB_API_KEY:
+          required: true
+        DATABASE_URL:
+          required: true
+        POSTGRES_DB:
+          required: true
+        POSTGRES_USER:
+          required: true
+        POSTGRES_PASSWORD:
+          required: true
 
 jobs:
     test:
@@ -24,14 +37,6 @@ jobs:
 
             - name: Run the test
               run: npm run test > report.txt
-
-# |
-                    # if [ -n "$MY_SECRET" ]; then
-                    #   echo "Secret is set and not empty."
-                    # else
-                    #   echo "Secret is NULL or empty."
-                    #   exit 1
-                    # fi
 
             - name: Archive the test report
               uses: actions/upload-artifact@v7.0.0
