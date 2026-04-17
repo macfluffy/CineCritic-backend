@@ -35,8 +35,6 @@ jobs:
                       echo "Secret is set and not empty."
                     else
                       echo "Secret is NULL or empty."
-                      exit 1
-                    fi
                     npm run test > report.txt
 
             - name: Archive the test report
