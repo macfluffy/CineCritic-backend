@@ -3,19 +3,19 @@ name: Test code
 on:
     # Only trigger this workflow when it is called
     workflow_call:
-      secrets:
-        JWT_SECRET:
-          required: true
-        TMDB_API_KEY:
-          required: true
-        DATABASE_URL:
-          required: true
-        POSTGRES_DB:
-          required: true
-        POSTGRES_USER:
-          required: true
-        POSTGRES_PASSWORD:
-          required: true
+      # secrets:
+      #   JWT_SECRET:
+      #     required: true
+      #   TMDB_API_KEY:
+      #     required: true
+      #   DATABASE_URL:
+      #     required: true
+      #   POSTGRES_DB:
+      #     required: true
+      #   POSTGRES_USER:
+      #     required: true
+      #   POSTGRES_PASSWORD:
+      #     required: true
 
 jobs:
     test:
