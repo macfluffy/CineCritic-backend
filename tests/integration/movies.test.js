@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
-import moviesRouter from '../src/routes/movies.js';
-import { createRequest, createResponse } from './helpers/mockHttp.js';
-import { errorHandler } from '../src/middlewares/error.js';
+import moviesRouter from '../../src/routes/movies.js';
+import { createRequest, createResponse } from '../helpers/mockHttp.js';
+import { errorHandler } from '../../src/middlewares/error.js';
 
 // Mock fetch so tests don't hit the real TMDB API
 const sampleTrending = [
@@ -53,7 +53,7 @@ afterAll(async () => {
   global.fetch = undefined;
   // Close database pool if it was imported
   try {
-    const pool = (await import('../src/models/database.js')).default;
+    const pool = (await import('../../src/models/database.js')).default;
     if (pool && typeof pool.end === 'function') {
       await pool.end();
     }
@@ -82,7 +82,7 @@ describe('health', () => {
   test('returns ok', async () => {
     const req = createRequest({ method: 'GET', url: '/health' });
     const res = createResponse();
-    const { default: app } = await import('../src/index.js');
+    const { default: app } = await import('../../src/index.js');
     await new Promise((resolve, reject) => {
       res.on('end', () => resolve());
       app.handle(req, res, (err) => {
@@ -96,7 +96,7 @@ describe('health', () => {
   test('database health check returns connected status', async () => {
     const req = createRequest({ method: 'GET', url: '/api/health/database' });
     const res = createResponse();
-    const { default: app } = await import('../src/index.js');
+    const { default: app } = await import('../../src/index.js');
     await new Promise((resolve, reject) => {
       res.on('end', () => resolve());
       app.handle(req, res, (err) => {

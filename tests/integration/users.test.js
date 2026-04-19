@@ -1,9 +1,9 @@
 import { jest } from '@jest/globals';
 import express from 'express';
-import { createRequest, createResponse } from './helpers/mockHttp.js';
-import { requireAuth } from '../src/middlewares/auth.js';
-import { errorHandler } from '../src/middlewares/error.js';
-import { verifyJwt, signJwt } from '../src/middlewares/jwt.js';
+import { createRequest, createResponse } from '../helpers/mockHttp.js';
+import { requireAuth } from '../../src/middlewares/auth.js';
+import { errorHandler } from '../../src/middlewares/error.js';
+import { verifyJwt, signJwt } from '../../src/middlewares/jwt.js';
 
 const users = [];
 let idCounter = 1;
@@ -56,7 +56,7 @@ jest.unstable_mockModule('../src/models/users.js', () => ({
 
 process.env.JWT_SECRET = 'test-secret';
 
-const { default: usersRouter } = await import('../src/routes/users.js');
+const { default: usersRouter } = await import('../../src/routes/users.js');
 
 const app = express();
 app.use(express.json());

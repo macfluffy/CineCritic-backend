@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
-import { createRequest, createResponse } from './helpers/mockHttp.js';
-import { signJwt } from '../src/middlewares/jwt.js';
-import { errorHandler } from '../src/middlewares/error.js';
+import { createRequest, createResponse } from '../helpers/mockHttp.js';
+import { signJwt } from '../../src/middlewares/jwt.js';
+import { errorHandler } from '../../src/middlewares/error.js';
 
 const movieStore = new Map();
 const watchlistStore = [];
@@ -77,7 +77,7 @@ jest.unstable_mockModule('../src/models/watchlist.js', () => ({
   },
 }));
 
-const { default: watchlistRouter } = await import('../src/routes/watchlist.js');
+const { default: watchlistRouter } = await import('../../src/routes/watchlist.js');
 
 describe('watchlist routes', () => {
   beforeEach(() => {
