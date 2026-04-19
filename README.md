@@ -36,6 +36,7 @@ CineCritic is a movie discovery and review platform; this back-end API is built 
 
 ## 🚀 Deployed URLs
 
+- Cloud Deployment: http://cinecritic-load-balancer-351804049.ap-southeast-2.elb.amazonaws.com/
 - Backend API: https://cinecritic.onrender.com
 - Health Check: https://cinecritic.onrender.com/health
 - Swagger Docs: https://cinecritic.onrender.com/docs
