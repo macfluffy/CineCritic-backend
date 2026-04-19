@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
-import { createRequest, createResponse } from './helpers/mockHttp.js';
-import { signJwt } from '../src/middlewares/jwt.js';
-import { errorHandler } from '../src/middlewares/error.js';
+import { createRequest, createResponse } from '../helpers/mockHttp.js';
+import { signJwt } from '../../src/middlewares/jwt.js';
+import { errorHandler } from '../../src/middlewares/error.js';
 
 // In-memory stores for mocks
 const movieStore = new Map();
@@ -84,7 +84,7 @@ jest.unstable_mockModule('../src/models/reviews.js', () => ({
     reviewsStore.filter((r) => r.user_id === userId && r.status === 'published'),
 }));
 
-const { default: reviewsRouter } = await import('../src/routes/reviews.js');
+const { default: reviewsRouter } = await import('../../src/routes/reviews.js');
 
 describe('reviews routes', () => {
   beforeEach(() => {
