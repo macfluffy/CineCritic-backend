@@ -49,6 +49,13 @@ jobs:
               task-definition: ${{ env.ECS_TASK_DEFINITION }}
               container-name: ${{ env.CONTAINER_NAME }}
               image: ghcr.io/${{ env.GITHUB_REPOSITORY }}:latest
+              environment-variables: |
+                POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+                POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+                DATABASE_URL=${{ secrets.DATABASE_URL }}
+                POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+                JWT_SECRET=${{ secrets.JWT_SECRET }}
+                TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
 
           - name: Deploy amazon ecs task definition
             uses: aws-actions/amazon-ecs-deploy-task-definition@v2
