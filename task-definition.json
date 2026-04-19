@@ -1,0 +1,87 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:775964394906:task-definition/cinecritic-backend-launcher:1",
+  "containerDefinitions": [
+    {
+      "name": "cinecritic-backend-container",
+      "image": "775964394906.dkr.ecr.ap-southeast-2.amazonaws.com/cinecritic-backend@sha256:1719b1f615fdfbb85fcf970699872553ef91165f173c98e640ba9e32275a071b",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 4000,
+          "hostPort": 4000,
+          "protocol": "tcp",
+          "name": "backend-port",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cinecritic-backend-launcher",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      }
+    }
+  ],
+  "family": "cinecritic-backend-launcher",
+  "taskRoleArn": "arn:aws:iam::775964394906:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::775964394906:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 1,
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    }
+  ],
+  "compatibilities": [
+    "EC2",
+    "MANAGED_INSTANCES",
+    "FARGATE"
+  ],
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "1024",
+  "memory": "3072",
+  "registeredAt": "2026-04-19T10:13:45.728Z",
+  "registeredBy": "arn:aws:iam::775964394906:root",
+  "enableFaultInjection": false
+}
