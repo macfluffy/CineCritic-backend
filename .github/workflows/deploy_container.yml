@@ -38,8 +38,9 @@ jobs:
               aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
               aws-region: ${{ env.AWS_REGION }}
           
-          - name: Verify aws identity
-            run: aws sts get-caller-identity
+          # Uncomment this step to verify your identity is correct
+          # - name: Verify aws identity
+          #   run: aws sts get-caller-identity
 
           - name: Fill in the new image id in the amazon ecs task definition
             id: task-definer
@@ -47,7 +48,7 @@ jobs:
             with:
               task-definition: ${{ env.ECS_TASK_DEFINITION }}
               container-name: ${{ env.CONTAINER_NAME }}
-              image: ghcr.io/${{ github.repository }}:latest
+              image: ghcr.io/${{ env.GITHUB_REPOSITORY }}:latest
 
           - name: Deploy amazon ecs task definition
             uses: aws-actions/amazon-ecs-deploy-task-definition@v2
